@@ -4,7 +4,11 @@ import com.hendisantika.springdocsample.model.Todo;
 import com.hendisantika.springdocsample.service.TodoApi;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by IntelliJ IDEA.
@@ -44,5 +48,17 @@ public class TodoController implements TodoApi {
         }
 
         return todo;
+    }
+
+    @Override
+    public void delete(String id) {
+        todos.removeIf(t -> t.getId().equals(id));
+    }
+
+    @PostConstruct
+    public void onInit() {
+        todos = Stream.of("Groceries", "Lisa's birthday")
+                .map(todo -> new Todo(UUID.randomUUID().toString(), todo))
+                .collect(Collectors.toList());
     }
 }
