@@ -4,6 +4,7 @@ import com.hendisantika.springdocsample.model.Todo;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,4 +44,7 @@ public interface TodoApi {
     @ResponseStatus(code = HttpStatus.OK)
     Todo update(@PathVariable String id, @RequestBody Todo todo);
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    void delete(@PathVariable String id);
 }
