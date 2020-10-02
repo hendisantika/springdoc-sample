@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-class Todo {
+public class Todo {
     private String id;
     private String text;
 }
