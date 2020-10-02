@@ -1,7 +1,10 @@
 package com.hendisantika.springdocsample.controller;
 
+import com.hendisantika.springdocsample.model.Todo;
 import com.hendisantika.springdocsample.service.TodoApi;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -14,4 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class TodoController implements TodoApi {
+    private List<Todo> todos;
+
+    @Override
+    public List<Todo> findAll() {
+        return todos;
+    }
 }
