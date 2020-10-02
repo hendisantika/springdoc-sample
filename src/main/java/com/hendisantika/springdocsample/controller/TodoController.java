@@ -23,4 +23,9 @@ public class TodoController implements TodoApi {
     public List<Todo> findAll() {
         return todos;
     }
+
+    @Override
+    public Todo findById(String id) {
+        return todos.stream().filter(todo -> todo.getId().equals(id)).findFirst().orElseGet(null);
+    }
 }
