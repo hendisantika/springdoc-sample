@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.hendisantika'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0'
 sourceCompatibility = '11'
 
 configurations {
@@ -33,3 +33,17 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+
+
+springBoot {
+    buildInfo {
+        properties {
+            artifact = 'spring-doc'
+            version = '1.0.0'
+            group = 'com.hendisantika'
+            name = 'Spring Doc Example application'
+        }
+    }
+}
+
