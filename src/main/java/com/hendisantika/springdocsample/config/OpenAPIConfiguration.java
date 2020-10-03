@@ -21,14 +21,12 @@ import io.swagger.v3.oas.annotations.servers.Server;
 @OpenAPIDefinition(
         info = @Info(
                 title = "Code-First Approach",
-                description = "" +
-                        "Spring Doc Sample",
+                description = "Spring Doc Sample",
                 contact = @Contact(name = "Hendi Santika", url = "https://linktr.ee/hendisantika", email =
                         "hendisantika@yahoo.co.id"),
                 license = @License(name = "MIT Licence", url = "https://github.com/hendisantika")),
         servers = @Server(url = "http://localhost:8080")
 )
 @SecurityScheme(name = "api", scheme = "basic", type = SecuritySchemeType.HTTP, in = SecuritySchemeIn.HEADER)
-
 public class OpenAPIConfiguration {
 }

@@ -22,7 +22,7 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/unsecured", "/swagger-ui/**", "/reflectoring-openapi/**").permitAll()
+                .antMatchers("/unsecured", "/swagger-ui/**", "/spring-doc/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();
