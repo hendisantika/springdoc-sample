@@ -1,12 +1,15 @@
 package com.hendisantika.springdocsample.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+
+import static org.springframework.security.config.Customizer.withDefaults;
 
 /**
  * Created by IntelliJ IDEA.
@@ -17,27 +20,33 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * Date: 03/10/20
  * Time: 05.57
  */
+@Configuration
 @EnableWebSecurity
-class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/unsecured", "/swagger-ui/**", "/spring-doc/**").permitAll()
+class SecurityConfiguration {
+    @Bean
+    public SecurityFilterChain configure(HttpSecurity http) throws Exception {
+        http.authorizeHttpRequests(req -> req
+                                .requestMatchers("/unsecured", "/swagger-ui/**", "/spring-doc/**").permitAll()
                 .anyRequest().authenticated()
-                .and()
-                .httpBasic();
+                )
+                .httpBasic(withDefaults());
+        return http.build();
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth, PasswordEncoder passwordEncoder) throws Exception {
         auth.inMemoryAuthentication()
+                .passwordEncoder(PasswordEncoderConfig.passwordEncoder())
                 .withUser("admin")
-                .password(passwordEncoder().encode("password"))
+//                .password(passwordEncoder().encode("password"))
+                .password(PasswordEncoderConfig.passwordEncoder().encode("password"))
                 .authorities("ADMIN");
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
+//
+
 }

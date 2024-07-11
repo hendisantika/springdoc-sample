@@ -2,9 +2,9 @@ package com.hendisantika.springdocsample.controller;
 
 import com.hendisantika.springdocsample.model.Todo;
 import com.hendisantika.springdocsample.service.TodoApi;
+import jakarta.annotation.PostConstruct;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
